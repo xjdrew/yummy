@@ -27,7 +27,7 @@ set confirm
 " 统一缩进为4
 set tabstop=4
 set shiftwidth=4
-" 用空格代替制表符     
+" 用空格代替制表符
 set expandtab
 " 在行和段开始处使用制表符
 set smarttab
@@ -49,14 +49,6 @@ set showmatch
 "keep buffer
 set hidden
 
-" 自动切换主目录
-set autochdir
-
-" google protobuf syntax
-augroup filetype
-    au! BufRead,BufNewFile *.proto setfiletype proto
-augroup end
-
 filetype off
 
 "config vundle
@@ -64,7 +56,7 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Plugin 'gmarik/Vundle.vim'
 
 " My Bundles here:
@@ -79,10 +71,22 @@ Plugin 'tpope/vim-fugitive'
 "Bundle 'msanders/snipmate.vim'
 "Bundle 'tpope/vim-surround'
 
-" 
+"
 Plugin 'ervandew/supertab'
-au FileType python set omnifunc=pythoncomplete#Complete
+"au FileType python set omnifunc=pythoncomplete#Complete
 let g:SuperTabDefaultCompletionType = "context"
+
+" vim-go
+Plugin 'fatih/vim-go'
+
+" vim php
+Plugin 'StanAngeloff/php.vim'
+
+"vim sproto
+Plugin 'spin6lock/vim_sproto'
+
+"yaml
+Bundle 'chase/vim-ansible-yaml'
 
 "Bundle 'sontek/minibufexpl.vim'
 "Bundle 'wincent/Command-T'
@@ -146,11 +150,24 @@ filetype plugin indent on     " required!
 set foldmethod=indent
 set foldlevel=99
 
+" 自动切换主目录
+set autochdir
+
+" Workaround: https://github.com/vim/vim/issues/704
+autocmd VimEnter * set autochdir
+
 " syntax highlightling
-syntax on 
+syntax on
 
 " try to detect filetypes
-filetype on 
+" filetype on
+
+" google protobuf syntax
+augroup filetype
+    au! BufRead,BufNewFile *.proto setfiletype proto
+augroup end
+
+"yaml
 
 " windows jump
 map <c-j> <c-w>j
@@ -161,11 +178,4 @@ map <c-h> <c-w>h
 " disable auto indent for the current file
 :nnoremap <F8> :setlocal noautoindent nocindent nosmartindent indentexpr=<CR>
 
-" go fmt
-if exists("g:did_load_filetypes")
-    filetype off
-    filetype plugin indent off
-end
-set runtimepath+=/usr/local/go/misc/vim
-filetype plugin indent on
-
+autocmd FileType yaml setlocal filetype=ansible
