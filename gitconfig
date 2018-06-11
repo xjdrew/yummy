@@ -1,0 +1,19 @@
+[core]
+    editor = vim
+
+[user]
+    name = zhuxiaojing
+    email = zxj151412@alibaba-inc.com
+    # name = xjdrew
+    # email = xj.drew@gmail.com
+
+[alias]
+    st = status
+    br = branch
+    co = checkout
+    ci = commit
+
+[gui]
+    spellingDictionary = en
+[push]
+        default = simple
